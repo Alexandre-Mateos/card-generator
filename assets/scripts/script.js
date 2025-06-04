@@ -1,4 +1,5 @@
 let form = document.querySelector("#formulaire");
+let resetButton = document.querySelector("#delete");
 let cardName = document.querySelector("#nom-carte");
 let cardType = document.querySelector("#type-carte");
 let cardPower = document.querySelector("#pouvoir-carte");
@@ -17,7 +18,7 @@ displayCard();
 
 form.addEventListener("submit", (e) => {
   // empêche le rafraichissement automatique de la page
-  e.preventDefault();
+//   e.preventDefault();
 
   // je créer une nouvelle carte à partir du formulaire
   let newCard = createCard(cardName, cardType, cardPower);
@@ -29,6 +30,10 @@ form.addEventListener("submit", (e) => {
   // j'affiche mes cartes
   displayCard();
 });
+
+resetButton.addEventListener("click", (e) => {
+    eraseAll();
+})
 
 function createCard(cardName, cardType, cardPower) {
   let card = {
@@ -57,6 +62,9 @@ function displayCard() {
   let arrayCollection = JSON.parse(stringCollection);
 
   for (let i = 0; i < arrayCollection.length; i++) {
+    let myCard = document.createElement("div");
+    myCard.classList.add("carte");
+
     let paraCardName = document.createElement("p");
     let paraCardType = document.createElement("p");
     let paraCardPower = document.createElement("p");
@@ -65,8 +73,16 @@ function displayCard() {
     paraCardType.innerHTML = arrayCollection[i].type;
     paraCardPower.innerHTML = arrayCollection[i].power;
 
-    cardBoard.insertAdjacentElement("beforeend", paraCardName);
-    cardBoard.insertAdjacentElement("beforeend", paraCardType);
-    cardBoard.insertAdjacentElement("beforeend", paraCardPower);
+    myCard.insertAdjacentElement("beforeend", paraCardName);
+    myCard.insertAdjacentElement("beforeend", paraCardType);
+    myCard.insertAdjacentElement("beforeend", paraCardPower);
+
+    cardBoard.insertAdjacentElement("beforeend", myCard);
   }
+}
+
+function eraseAll(){
+    localStorage.clear("collection-carte");
+    let allMyCArd = document.querySelectorAll(".carte");
+    allMyCArd.remove();
 }
