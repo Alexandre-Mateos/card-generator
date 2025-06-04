@@ -2,23 +2,32 @@ let form = document.querySelector("#formulaire");
 let cardName = document.querySelector("#nom-carte");
 let cardType = document.querySelector("#type-carte");
 let cardPower = document.querySelector("#pouvoir-carte");
+let cardBoard = document.querySelector("#affichage-cartes");
 
-// je créer un tableau vide
-const collection = [];
-// j'encode mon tableau avec JSON
-let cardCollection = JSON.stringify(collection);
-// je stock mon tableau encodé
-localStorage.setItem("collection-carte", cardCollection);
+if (!localStorage.getItem("collection-carte")) {
+  // je créer un tableau vide
+  const collection = [];
+  // j'encode mon tableau avec JSON
+  let cardCollection = JSON.stringify(collection);
+  // je stock mon tableau encodé
+  localStorage.setItem("collection-carte", cardCollection);
+}
+
+displayCard();
 
 form.addEventListener("submit", (e) => {
-  // empêche le rafraichissment automatique de la page
+  // empêche le rafraichissement automatique de la page
   e.preventDefault();
 
   // je créer une nouvelle carte à partir du formulaire
   let newCard = createCard(cardName, cardType, cardPower);
+
   // je stock ma carte dans la collection
   pushCardIntoCollection(newCard);
-
+  // j'efface mon cardBoard précédent
+  cardBoard.innerHTML = "";
+  // j'affiche mes cartes
+  displayCard();
 });
 
 function createCard(cardName, cardType, cardPower) {
@@ -41,4 +50,23 @@ function pushCardIntoCollection(card) {
   decodedCollection = JSON.stringify(decodedCollection);
   // je stock mon tableau dans localStorage
   localStorage.setItem("collection-carte", decodedCollection);
+}
+
+function displayCard() {
+  let stringCollection = localStorage.getItem("collection-carte");
+  let arrayCollection = JSON.parse(stringCollection);
+
+  for (let i = 0; i < arrayCollection.length; i++) {
+    let paraCardName = document.createElement("p");
+    let paraCardType = document.createElement("p");
+    let paraCardPower = document.createElement("p");
+
+    paraCardName.innerHTML = arrayCollection[i].name;
+    paraCardType.innerHTML = arrayCollection[i].type;
+    paraCardPower.innerHTML = arrayCollection[i].power;
+
+    cardBoard.insertAdjacentElement("beforeend", paraCardName);
+    cardBoard.insertAdjacentElement("beforeend", paraCardType);
+    cardBoard.insertAdjacentElement("beforeend", paraCardPower);
+  }
 }
