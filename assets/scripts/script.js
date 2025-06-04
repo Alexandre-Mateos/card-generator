@@ -65,7 +65,7 @@ function displayCard() {
 
     // création de la div qui contiendra tous les éléments de la carte
     let myCard = document.createElement("div");
-    myCard.classList.add("carte");
+    myCard.classList.add("card", "flex-grow-1");
 
     // affichage de la ligne identité = type (emoticone) + nom
     let paraCardIdentity = document.createElement("p");
@@ -86,6 +86,8 @@ function displayCard() {
         paraCardIdentity.innerHTML = `✨ ${arrayCollection[i].name}`;
         break;
     }
+
+    
 
     // affichage de la lige pouvoir
     let paraCardPower = document.createElement("p");
