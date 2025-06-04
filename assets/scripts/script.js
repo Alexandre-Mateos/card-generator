@@ -18,7 +18,7 @@ displayCard();
 
 form.addEventListener("submit", (e) => {
   // empêche le rafraichissement automatique de la page
-//   e.preventDefault();
+  //   e.preventDefault();
 
   // je créer une nouvelle carte à partir du formulaire
   let newCard = createCard(cardName, cardType, cardPower);
@@ -32,8 +32,8 @@ form.addEventListener("submit", (e) => {
 });
 
 resetButton.addEventListener("click", (e) => {
-    eraseAll();
-})
+  eraseAll();
+});
 
 function createCard(cardName, cardType, cardPower) {
   let card = {
@@ -62,27 +62,46 @@ function displayCard() {
   let arrayCollection = JSON.parse(stringCollection);
 
   for (let i = 0; i < arrayCollection.length; i++) {
+
+    // création de la div qui contiendra tous les éléments de la carte
     let myCard = document.createElement("div");
     myCard.classList.add("carte");
 
-    let paraCardName = document.createElement("p");
-    let paraCardType = document.createElement("p");
+    // affichage de la ligne identité = type (emoticone) + nom
+    let paraCardIdentity = document.createElement("p");
+    switch (arrayCollection[i].type) {
+      case "Feu":
+        paraCardIdentity.innerHTML = `🔥 ${arrayCollection[i].name}`;
+        break;
+      case "Eau":
+        paraCardIdentity.innerHTML = `💧 ${arrayCollection[i].name}`;
+        break;
+      case "Terre":
+        paraCardIdentity.innerHTML = `🌱 ${arrayCollection[i].name}`;
+        break;
+      case "Air":
+        paraCardIdentity.innerHTML = `🌪️ ${arrayCollection[i].name}`;
+        break;
+      case "Magie":
+        paraCardIdentity.innerHTML = `✨ ${arrayCollection[i].name}`;
+        break;
+    }
+
+    // affichage de la lige pouvoir
     let paraCardPower = document.createElement("p");
+    paraCardPower.innerHTML = `Pouvoir : ${arrayCollection[i].power}`;
 
-    paraCardName.innerHTML = arrayCollection[i].name;
-    paraCardType.innerHTML = arrayCollection[i].type;
-    paraCardPower.innerHTML = arrayCollection[i].power;
-
-    myCard.insertAdjacentElement("beforeend", paraCardName);
-    myCard.insertAdjacentElement("beforeend", paraCardType);
+    // j'attache les infos de ma catre dans ma carte
+    myCard.insertAdjacentElement("beforeend", paraCardIdentity);
     myCard.insertAdjacentElement("beforeend", paraCardPower);
-
+    
+    // j'attache ma carte dans le html prévu
     cardBoard.insertAdjacentElement("beforeend", myCard);
   }
 }
 
-function eraseAll(){
-    localStorage.clear("collection-carte");
-    let allMyCArd = document.querySelectorAll(".carte");
-    allMyCArd.remove();
+function eraseAll() {
+  localStorage.clear("collection-carte");
+  let allMyCArd = document.querySelectorAll(".carte");
+  allMyCArd.remove();
 }
