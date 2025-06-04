@@ -16,17 +16,9 @@ form.addEventListener("submit", (e) => {
 
   // je créer une nouvelle carte à partir du formulaire
   let newCard = createCard(cardName, cardType, cardPower);
+  // je stock ma carte dans la collection
+  pushCardIntoCollection(newCard);
 
-  // je récupère mon tableau
-  let encodedCollection = localStorage.getItem("collection-carte");
-  // je décode mon tableau
-  let decodedCollection = JSON.parse(encodedCollection);
-  // je stocke ma carte dans le tableau;
-  decodedCollection.push(newCard);
-  // je réencode mon tableau
-  decodedCollection = JSON.stringify(decodedCollection);
-  // je stock mon tableau dans localStorage
-  localStorage.setItem("collection-carte", decodedCollection);
 });
 
 function createCard(cardName, cardType, cardPower) {
@@ -36,4 +28,17 @@ function createCard(cardName, cardType, cardPower) {
     power: cardPower.value,
   };
   return card;
+}
+
+function pushCardIntoCollection(card) {
+  // je récupère mon tableau
+  let encodedCollection = localStorage.getItem("collection-carte");
+  // je décode mon tableau
+  let decodedCollection = JSON.parse(encodedCollection);
+  // je stocke ma carte dans le tableau;
+  decodedCollection.push(card);
+  // je réencode mon tableau
+  decodedCollection = JSON.stringify(decodedCollection);
+  // je stock mon tableau dans localStorage
+  localStorage.setItem("collection-carte", decodedCollection);
 }
