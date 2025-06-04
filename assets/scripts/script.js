@@ -87,8 +87,6 @@ function displayCard() {
         break;
     }
 
-    
-
     // affichage de la lige pouvoir
     let paraCardPower = document.createElement("p");
     paraCardPower.innerHTML = `Pouvoir : ${arrayCollection[i].power}`;

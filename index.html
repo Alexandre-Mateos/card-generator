@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="assets/scripts/script.js" defer></script>
-    <link rel="stylesheet" href="assets/style/mon-style.css">
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="assets/style/mon-style.css" />
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  </head>
+  <body class="container-fluid">
     <h1>Carte Mystères - Crée ta collection magique</h1>
-    <form id="formulaire" class="">
-        <input type="text" placeholder="Nom de la carte" id="nom-carte">
-        <select id="type-carte">
-            <option value="">--Type--</option>
-            <option value="Feu">Feu</option>
-            <option value="Eau">Eau</option>
-            <option value="Terre">Terre</option>
-            <option value="Air">Air</option>
-            <option value="Magie">Magie</option>
-        </select>
-        <input type="text" placeholder="Pouvoir spécial" id="pouvoir-carte">
-        <button type="submit">Ajouter</button>
-        <button id="delete">x</button>
+    <form id="formulaire" class="d-flex gap-2">
+      <input type="text" placeholder="Nom de la carte" id="nom-carte" class="flex-grow-1"/>
+      <select id="type-carte" class="flex-grow-1">
+        <option value="">--Type--</option>
+        <option value="Feu">Feu</option>
+        <option value="Eau">Eau</option>
+        <option value="Terre">Terre</option>
+        <option value="Air">Air</option>
+        <option value="Magie">Magie</option>
+      </select>
+      <input type="text" placeholder="Pouvoir spécial" id="pouvoir-carte" class="flex-grow-1"/>
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+      <button id="delete" class="btn btn-danger">x</button>
     </form>
-    <div id="affichage-cartes" class="d-flex"></div>
-</body>
+    <div id="affichage-cartes" class="d-flex gap-3 p-2 flex-wrap"></div>
+  </body>
 </html>
